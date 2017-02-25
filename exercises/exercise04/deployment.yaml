@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pingpodredis
+  labels:
+    name: pingpodredis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: pingpodredis
+    spec:
+      containers:
+      - name: pingredis
+        image: ipedrazas/pingpodredis
+        ports:
+        - containerPort: 8080
+        env:
+          - name: REDIS_HOST
+            value: "localhost"
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379

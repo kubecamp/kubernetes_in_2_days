@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    app: ssl-nginx
+data:
+  ssl-nginx.conf: |
+    server {
+            listen 80 default_server;
+            listen [::]:80 default_server ipv6only=on;
+
+            listen 443 ssl;
+
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+
+            server_name your_domain.com;
+            ssl_certificate /etc/nginx/ssl/tls.crt;
+            ssl_certificate_key /etc/nginx/ssl/tls.key;
+
+            location / {
+                    try_files $uri $uri/ =404;
+            }
+        }

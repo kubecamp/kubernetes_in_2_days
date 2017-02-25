@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx:alpine
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        - containerPort: 443
+          protocol: TCP
+        volumeMounts:
+        - name: nginx-certs
+          readOnly: true
+          mountPath: /etc/nginx/ssl
+        - name: config-nginx
+          mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: nginx-certs
+          secret:
+            secretName: nginx-ssl
+        - name: config-nginx
+          configMap:
+            name: nginx-config
+            items:
+            - key: ssl-nginx.conf
+              path: default.conf
