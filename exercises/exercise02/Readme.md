@@ -9,7 +9,7 @@ First, let's get the pods:
 
 now, let's read the logs of that pod:
 
-        kubectl get logs hello-1767487725-smthc
+        kubectl logs hello-1767487725-smthc
 
 Let's send some traffic... so, how do we access the pod? a solution is to bind the
 pod port to our localhost:
@@ -22,15 +22,15 @@ Let's try to access our website:
 
 let's read the logs again:
 
-        kubectl get logs hello-1767487725-smthc
+        kubectl logs hello-1767487725-smthc
 
 Can we tail the logs?
 
-        kubectl get logs hello-1767487725-smthc -f
+        kubectl logs hello-1767487725-smthc -f
 
  or
 
-        kubectl get logs -f hello-1767487725-smthc
+        kubectl logs -f hello-1767487725-smthc
 
 
 
