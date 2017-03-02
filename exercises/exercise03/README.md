@@ -2,14 +2,14 @@
 
 ## Services
 
-Binding our pod to our localhost can be great for development, but it's nbot going to
-work very well in prod. Yes, `it works in my machine is as true as useless`.
+Binding our pod to our localhost can be great for development, but it's not going to
+work very well in prod. Yes, `it works on my machine` is as true as useless.
 
 Let's expose our pods to the world using a service:
 
         kubectl expose deployment hello
 
-So, we have a service that sends traffic to our pods. Excellene, let's look at it:
+So, we have a service that sends traffic to our pods. Excellent, let's look at it:
 
 
         kubectl get svc
