@@ -2,6 +2,7 @@
 
 To create a self-signed certificate we need to execute teh following command:
 
+    mkdir certs
     sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/tls.key -out certs/tls.crt
 
 The command will ask a few questions, the important one is to put the right FQDN (we use lab.kube.camp), which it will be the domain we want to use with this certificate.
@@ -34,7 +35,7 @@ Once we have the certificate, we need to configure nginx. Create a file called `
 
 Try to run a docker container using these certificates and verify that it works
 
-    docker run -d --rm -p 8443:443 -p 8000:80 -v $(pwd)/conf/ssl-nginx.conf:/etc/nginx/conf.d/default.conf:ro -v $(pwd)/certs:/etc/nginx/ssl nginx
+    docker run --it --rm -p 8443:443 -p 8000:80 -v $(pwd)/ssl-nginx.conf:/etc/nginx/conf.d/default.conf:ro -v $(pwd)/certs:/etc/nginx/ssl nginx
 
 
 Test it by doing
@@ -166,6 +167,6 @@ and
 
 Excellent, time to scale:
 
-    kubectl scale deployment nginx --scale=3
+    kubectl scale deployment nginx --replicas=3
 
 Congratulate yourself if you get 200 OK twice!
