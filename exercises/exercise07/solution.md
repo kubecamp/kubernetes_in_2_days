@@ -60,7 +60,7 @@ To create the secret you can create a `yaml` file or you can execute the followi
 
 To create the configmap, you can create it using the following command, or creating the file:
 
-    kubectl create configmap nginx-config --from-file=conf/ssl-nginx.conf
+    kubectl create configmap nginx-config --from-file=ssl-nginx.conf
 
 Finally, you have to create a deployment for nginx and a service:
 
