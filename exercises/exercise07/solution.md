@@ -35,7 +35,7 @@ Once we have the certificate, we need to configure nginx. Create a file called `
 
 Try to run a docker container using these certificates and verify that it works
 
-    docker run --it --rm -p 8443:443 -p 8000:80 -v $(pwd)/ssl-nginx.conf:/etc/nginx/conf.d/default.conf:ro -v $(pwd)/certs:/etc/nginx/ssl nginx
+    docker run -d -p 8443:443 -p 8000:80 -v $(pwd)/ssl-nginx.conf:/etc/nginx/conf.d/default.conf:ro -v $(pwd)/certs:/etc/nginx/ssl nginx
 
 
 Test it by doing
